@@ -10,7 +10,7 @@ describe('node-opensubtitles', function () {
 	});
 
 	it('should search for subtitles', function (done) {
-		this.timeout(9999);
+		this.timeout(99999);
 
 		os.SearchSubtitles([{
 			query: 'breaking bad',
@@ -24,22 +24,27 @@ describe('node-opensubtitles', function () {
 	});
 
 	it('should list available translations', function (done) {
-		this.timeout(9999);
+		this.timeout(99999);
 
 		os.GetAvailableTranslations().then(function (translations) {
 			done();
 		});
 	});
 
-	it('should check sub hash', function (done) {
-		this.timeout(9999);
-		os.SearchSubtitles([{
+	it('should download subtitles', function (done) {
+		this.timeout(99999);
+		os.search([{
 			query: 'breaking bad',
 			episode: 1,
-			season: 1
+			season: 1,
+			sublanguageid: 'por'
 		}]).then(function (value) {
-			value.data.	should.be.an.Object;
-			done();
-		})
+			value.data[0].should.have.property('IDSubtitleFile');
+
+			return os.download([value.data[0].IDSubtitleFile, value.data[1].IDSubtitleFile]).then(function (data) {
+				console.log(data.toString('utf8'));
+				done();
+			});
+		});
 	});
 });
