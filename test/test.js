@@ -1,6 +1,8 @@
-var should = require('should');
 var Os = require('../index');
 var os = new Os();
+var fs = require('fs');
+var zlib = require('zlib');
+var should = require('should');
 
 describe('node-opensubtitles', function () {
 	it('should authenticate', function (done) {
@@ -18,7 +20,7 @@ describe('node-opensubtitles', function () {
 			episode: 1,
 			season: 1
 		}]).then(function (value) {
-			value.should.be.an.Object;
+			value[0].should.have.property('SubFileName');
 			done();
 		});
 	});
@@ -31,7 +33,7 @@ describe('node-opensubtitles', function () {
 		});
 	});
 
-	it('should download subtitles', function (done) {
+	it('should download subtitles by direct method', function (done) {
 		this.timeout(99999);
 		os.search([{
 			query: 'breaking bad',
@@ -39,12 +41,32 @@ describe('node-opensubtitles', function () {
 			season: 1,
 			sublanguageid: 'por'
 		}]).then(function (value) {
-			value.data[0].should.have.property('IDSubtitleFile');
-
-			return os.download([value.data[0].IDSubtitleFile, value.data[1].IDSubtitleFile]).then(function (data) {
-				console.log(data.toString('utf8'));
+			return value[0].download('./test').then(function () {
 				done();
 			});
+		}, function (err) {
+			console.log(err);
+			done(err);
+		});
+	});
+
+	it('should download subtitles using the opensubtitles api directly', function (done) {
+		this.timeout(99999);
+		os.search([{
+			query: 'breaking bad',
+			episode: 1,
+			season: 1,
+			sublanguageid: 'por'
+		}]).then(function (value) {
+			return os.download([value[0].IDSubtitleFile]);
+		}).then(function (r) {
+			r[0].save('./test/my-sub.srt').then(function () {
+				fs.existsSync('./test/my-sub.srt').should.be.exactly(true);
+				done();
+			})
+		}, function (err) {
+			console.log(err);
+			done(err);
 		});
 	});
 });

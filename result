@@ -1,26 +1,0 @@
-
-
-  node-opensubtitles
-    ✓ should authenticate (1720ms)
-    1) should search for subtitles
-    2) should list available translations
-    3) should download subtitles
-
-
-  1 passing (32s)
-  3 failing
-
-  1) node-opensubtitles should search for subtitles:
-     Error: timeout of 9999ms exceeded. Ensure the done() callback is being called in this test.
-  
-
-  2) node-opensubtitles should list available translations:
-     Error: timeout of 9999ms exceeded. Ensure the done() callback is being called in this test.
-  
-
-  3) node-opensubtitles should download subtitles:
-     Error: timeout of 9999ms exceeded. Ensure the done() callback is being called in this test.
-  
-
-
-

@@ -1,6 +1,6 @@
 {
   "name": "node-opensubtitles",
-  "version": "1.0.1",
+  "version": "1.0.11",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,12 +9,15 @@
   "author": "Victor Queiroz <victorcqueirozg@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-jshint": "^1.10.0",
     "mocha": "^2.2.4",
     "should": "^6.0.1"
   },
   "dependencies": {
     "lodash": "^3.8.0",
     "q": "^1.3.0",
+    "temp": "^0.8.1",
     "xmlrpc": "^1.3.0"
   }
 }

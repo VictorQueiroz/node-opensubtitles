@@ -25,4 +25,26 @@ os.SearchSubtitles([{
 }]).then(function (value) {
 	console.log(value.data);
 });
+
+os.search([{
+	query: 'breaking bad',
+	episode: 1,
+	season: 1,
+	sublanguageid: 'por'
+}]).then(function (value) {
+	return os.download(value.map(function (value) {
+		return value.IDSubtitleFile;
+	}));
+}).then(function (subtitles) {
+	return Q.all(subtitles.map(function (buf, index) {
+		return buf.save('./my-sub-' + index + '.srt');
+	}));
+});
 ```
+
+### API
+- os.search
+	- Return an array, with the results.
+
+- os.download
+	- Return an array of buffers, already base64 decoded and ready to save
