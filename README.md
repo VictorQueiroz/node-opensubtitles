@@ -1,5 +1,7 @@
 # node-opensubtitles
 
+An open source library to help you to download and search subtitles through the OpenSubtitles API.
+
 ### Installation
 ```
 npm install --save node-opensubtitles
