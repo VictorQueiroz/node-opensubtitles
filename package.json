@@ -1,0 +1,20 @@
+{
+  "name": "node-opensubtitles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Victor Queiroz <victorcqueirozg@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.2.4",
+    "should": "^6.0.1"
+  },
+  "dependencies": {
+    "lodash": "^3.8.0",
+    "q": "^1.3.0",
+    "xmlrpc": "^1.3.0"
+  }
+}
